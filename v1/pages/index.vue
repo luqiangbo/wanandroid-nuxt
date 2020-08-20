@@ -2,6 +2,7 @@
   <div class="container">
     <div>
       <el-button type="primary">v1</el-button>
+      <el-button type="primary">v1</el-button>
     </div>
   </div>
 </template>
