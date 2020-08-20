@@ -23,4 +23,5 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 ```
 docker run --name web-nuxt01 -p 43001:3001 -d caniuse/web-nuxt:0.0.1
+docker run --name web-nuxt01 -p 43001:3001 -p 43002:3002 -d caniuse/web-nuxt:0.0.1
 ```
