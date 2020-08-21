@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev1": "nuxt --config-file v1/nuxt.config.js",
-    "dev2": "nuxt --config-file v2/nuxt.config.js",
-    "build1": "nuxt build --config-file v1/nuxt.config.js",
-    "build2": "nuxt build --config-file v2/nuxt.config.js",
-    "start1": "nuxt start --config-file v1/nuxt.config.js",
-    "start2": "nuxt start --config-file v2/nuxt.config.js",
+    "dev:v1": "nuxt --config-file v1/nuxt.config.js",
+    "build:v1": "nuxt build --config-file v1/nuxt.config.js",
+    "start:v1": "nuxt start --config-file v1/nuxt.config.js",
+    "cx:v1": "npm run build:v1 && npm run start:v1",
+    "dev:v2": "nuxt --config-file v2/nuxt.config.js",
+    "build:v2": "nuxt build --config-file v2/nuxt.config.js",
+    "start:v2": "nuxt start --config-file v2/nuxt.config.js",
+    "cx:v2": "npm run build:v2 && npm run start:v2",
+    "all": "npm-run-all --parallel cx:*",
+    "rimraf": "rimraf node_modules",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "yarn lint:js"
@@ -28,6 +32,8 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "npm-run-all": "^4.1.5"
   }
 }
