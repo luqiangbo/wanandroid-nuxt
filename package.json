@@ -12,6 +12,7 @@
     "start:v2": "nuxt start --config-file v2/nuxt.config.js",
     "cx:v2": "npm run build:v2 && npm run start:v2",
     "all": "npm-run-all --parallel cx:*",
+    "all-start": "npm-run-all --parallel start:*",
     "rimraf": "rimraf node_modules",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",

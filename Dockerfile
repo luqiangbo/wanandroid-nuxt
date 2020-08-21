@@ -16,8 +16,10 @@ ENV NUXT_HOST 0.0.0.0
 COPY . /usr/src/app/
 
 # build
+RUN npm run build:v1
+RUN npm run build:v2
 EXPOSE 3001 3002
 
 # Running the app
-CMD "npm" "run" "all"
+CMD ["npm" "all-start"]
 # ENTRYPOINT ["./entrypoint.sh"]
