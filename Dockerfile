@@ -18,10 +18,8 @@ COPY . /usr/src/app/
 # build
 RUN npm run build:v1
 RUN npm run build:v2
-EXPOSE 3001
-EXPOSE 3002
-
+EXPOSE 3001 3002
 
 # Running the app
-CMD ["npm" "run" "all-start"]
+CMD "npm" "run" "all-start"
 # ENTRYPOINT ["./entrypoint.sh"]
