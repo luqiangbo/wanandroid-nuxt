@@ -28,12 +28,27 @@
         <i class="iconfont icon-search"></i>
       </div>
     </div>
+    <!-- 测试 -->
+    <div>
+      <ul>
+        <li :key="id" v-for="{ id, title } in slicedPosts">
+          <nuxt-link v-if="title !== 'foo'" :to="`/${id}`">
+            {{ title }}
+          </nuxt-link>
+          <p v-else>{{ title }}</p>
+        </li>
+      </ul>
+      <div class="links">
+        <button @click="createPost" class="button--grey">
+          Create a post (send POST request)
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Index',
   data() {
     return {
       s_swiperOptions: {
@@ -67,15 +82,26 @@ export default {
           },
         ],
       },
+      posts: [],
     }
+  },
+  async asyncData(ctx) {
+    const res = await ctx.app.$postRepository.index()
+    console.log(res[1])
+    return {
+      posts: res,
+    }
+  },
+  mounted() {
+    this.swiper.slideTo(1, 1000, false)
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper
     },
-  },
-  mounted() {
-    this.swiper.slideTo(1, 1000, false)
+    slicedPosts() {
+      return this.posts.slice(-3)
+    },
   },
   methods: {
     onPage(v) {
@@ -84,10 +110,20 @@ export default {
     onSlidePrev() {
       this.swiper.slidePrev()
     },
+    async createPost() {
+      const result = await this.$postRepository.create({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      })
+      console.log(result)
+      // Fix ids to be unique
+      this.posts.push({ ...result, id: Number(this.posts.slice(-1)[0].id) + 1 })
+    },
   },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './index';
 </style>

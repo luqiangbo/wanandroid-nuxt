@@ -46,6 +46,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/swiper',
+    '@/plugins/repository',
     { src: './static/iconfont/iconfont.js', ssr: false },
   ],
   /*
@@ -74,7 +75,9 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: 'https://jsonplaceholder.typicode.com/',
+  },
   /*
    ** Content module configuration
    ** See https://content.nuxtjs.org/configuration
