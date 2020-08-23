@@ -6,7 +6,8 @@
           <div>{{ t.title }}</div>
           <div>
             <!-- <img src="@/assets/banner1.jpg" alt="" /> -->
-            <img src="@/static/image/banner/banner1.jpg" alt="" />
+            <!-- <img src="@/static/image/banner/banner1.jpg" alt="" /> -->
+            <img src="~static/image/banner/banner1.jpg" alt="" />
           </div>
         </swiper-slide>
       </swiper>
@@ -43,6 +44,9 @@
           Create a post (send POST request)
         </button>
       </div>
+      <nuxt-link :to="`/xiaomi`">
+        错误页面
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -124,6 +128,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index';
+<style lang="scss">
+// @import './index';
+@import '@assets/style/index.scss';
 </style>

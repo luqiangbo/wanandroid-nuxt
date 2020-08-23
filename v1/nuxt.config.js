@@ -1,3 +1,4 @@
+const path = require('path')
 export default {
   srcDir: __dirname,
   buildDir: `.nuxt/v1`,
@@ -38,6 +39,10 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     './static/iconfont/iconfont.css',
+    {
+      src: '../com/style/res.scss',
+      lang: 'scss',
+    },
   ],
   /*
    ** Plugins to load before mounting the App
@@ -47,6 +52,7 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/swiper',
     '@/plugins/repository',
+    '@/plugins/axios',
     { src: './static/iconfont/iconfont.js', ssr: false },
   ],
   /*
@@ -89,5 +95,19 @@ export default {
    */
   build: {
     transpile: [/^element-ui/],
+    extend(config, ctx) {
+      // config.resolve.alias['utils'] = path.join(__dirname, 'utils')
+      // config.resolve.alias['com'] = path.join(__dirname, '../com')
+      // if (ctx.isClient) {
+      //   // 添加 alias 配置
+      //   console.log('webpack', path.resolve(__dirname, '../com'))
+      //   Object.assign(config.resolve.alias, {
+      //     com: path.resolve(__dirname, '../com'),
+      //   })
+      // }
+    },
+  },
+  router: {
+    middleware: 'auth',
   },
 }

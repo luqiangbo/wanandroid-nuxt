@@ -8,6 +8,10 @@
 
 <script>
 export default {
+  validate({ params }) {
+    // Must be a number
+    return /^\d+$/.test(params.id)
+  },
   data() {
     return {
       post: {},
@@ -16,6 +20,21 @@ export default {
   async asyncData({ app, params }) {
     return {
       post: await app.$postRepository.show(params.id),
+    }
+  },
+  // seo
+  head() {
+    return {
+      title: '链接库流量卡',
+      meta: [{ hid: 'description', name: 'news', content: '厨房用品' }],
+      script: [
+        {
+          innerHTML: require('@/static/js/haha'),
+          type: 'text/javascript',
+          charset: 'utf-8',
+        },
+      ],
+      __dangerouslyDisableSanitizers: ['script'],
     }
   },
 }
