@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="index">
     <div>
       <swiper ref="mySwiper" :options="s_swiperOptions">
         <swiper-slide v-for="(t, i) in s_banner.list" :key="i">
@@ -32,11 +32,10 @@
     <!-- 测试 -->
     <div>
       <ul>
-        <li :key="id" v-for="{ id, title } in slicedPosts">
-          <nuxt-link v-if="title !== 'foo'" :to="`/${id}`">
+        <li :key="chapterId" v-for="{ chapterId, title } in slicedPosts">
+          <nuxt-link :to="`/${chapterId}`">
             {{ title }}
           </nuxt-link>
-          <p v-else>{{ title }}</p>
         </li>
       </ul>
       <div class="links">
@@ -90,10 +89,10 @@ export default {
     }
   },
   async asyncData(ctx) {
-    const res = await ctx.app.$postRepository.index()
-    console.log(res[1])
+    const res1 = await ctx.app.$axiosWan.page('article/list/1/json')
+    // console.log(res1.data.datas[0])
     return {
-      posts: res,
+      posts: res1.data.datas,
     }
   },
   mounted() {
@@ -115,20 +114,19 @@ export default {
       this.swiper.slidePrev()
     },
     async createPost() {
-      const result = await this.$postRepository.create({
-        title: 'foo',
-        body: 'bar',
-        userId: 1,
-      })
-      console.log(result)
-      // Fix ids to be unique
-      this.posts.push({ ...result, id: Number(this.posts.slice(-1)[0].id) + 1 })
+      // const result = await this.$postRepository.create({
+      //   title: 'foo',
+      //   body: 'bar',
+      //   userId: 1,
+      // })
+      // console.log(result)
+      // // Fix ids to be unique
+      // this.posts.push({ ...result, id: Number(this.posts.slice(-1)[0].id) + 1 })
     },
   },
 }
 </script>
 
 <style lang="scss">
-// @import './index';
-@import '@assets/style/index.scss';
+@import './index';
 </style>

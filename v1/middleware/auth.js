@@ -1,5 +1,6 @@
 export default function (context) {
-  console.log('middleware')
+  console.log(process.env)
+  // console.log('auth', context)
   const userAgent = process.server
     ? context.req.headers['user-agent']
     : navigator.userAgent

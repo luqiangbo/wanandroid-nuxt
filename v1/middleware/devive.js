@@ -1,4 +1,4 @@
-import { deviceType } from '@@/com/util/device.js'
+import { deviceType } from '@/util/device.js'
 export default function (context) {
   console.log('en', context)
   context.userAgent = process.server

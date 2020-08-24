@@ -1,6 +1,7 @@
 export default ({ $axios, redirect }) => {
   $axios.onRequest((config) => {
-    console.log('Making request to ' + config.url)
+    console.log(config)
+    console.log('接口' + config.url)
   })
 
   $axios.onError((error) => {

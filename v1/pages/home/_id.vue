@@ -17,9 +17,13 @@ export default {
       post: {},
     }
   },
-  async asyncData({ app, params }) {
+  asyncData({ app, params }) {
     return {
-      post: await app.$postRepository.show(params.id),
+      post: {
+        title: 'xiaomin',
+        body: 'enen',
+        userId: 'dddd',
+      },
     }
   },
   // seo

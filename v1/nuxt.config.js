@@ -1,4 +1,17 @@
 const path = require('path')
+const myApiEnv = process.env.MY_API_ENV
+let baseURL = 'https://www.wanandroid.com/'
+if (myApiEnv === 'local') {
+  // 本地环境
+  baseURL = 'https://www.wanandroid.com/'
+} else if (myApiEnv === 'test') {
+  // 测试环境
+  baseURL = 'https://www.wanandroid.com12/'
+} else if (myApiEnv === 'product') {
+  // 线上环境
+  baseURL = 'https://www.wanandroid.com1/'
+}
+
 export default {
   srcDir: __dirname,
   buildDir: `.nuxt/v1`,
@@ -37,12 +50,12 @@ export default {
    ** Global CSS
    */
   css: [
-    'element-ui/lib/theme-chalk/index.css',
-    './static/iconfont/iconfont.css',
     {
-      src: '../com/style/res.scss',
+      src: '@/assets/style/reset.scss',
       lang: 'scss',
     },
+    'element-ui/lib/theme-chalk/index.css',
+    './static/iconfont/iconfont.css',
   ],
   /*
    ** Plugins to load before mounting the App
@@ -51,8 +64,8 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/swiper',
-    '@/plugins/repository',
-    '@/plugins/axios',
+    '@/plugins/api/all',
+    '@/plugins/api/axios',
     { src: './static/iconfont/iconfont.js', ssr: false },
   ],
   /*
@@ -82,7 +95,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://jsonplaceholder.typicode.com/',
+    // baseURL: 'https://jsonplaceholder.typicode.com/',
+    baseURL,
   },
   /*
    ** Content module configuration
@@ -109,5 +123,11 @@ export default {
   },
   router: {
     middleware: 'auth',
+  },
+  publicRuntimeConfig: {
+    // baseURL: process.env.BASE_URL || 'https://nuxtjs.org',
+  },
+  privateRuntimeConfig: {
+    apiSecret: process.env.API_SECRET,
   },
 }
