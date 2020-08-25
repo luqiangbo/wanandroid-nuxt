@@ -1,6 +1,10 @@
 export default ({ $axios, redirect }) => {
+  $axios.setHeader('Content-Type', 'application/x-www-form-urlencoded', [
+    'post',
+  ])
+  $axios.setToken('123', 'Bearer', ['post', 'delete'])
   $axios.onRequest((config) => {
-    console.log(config)
+    // console.log('接口 config', config)
     console.log('接口' + config.url)
   })
 

@@ -6,10 +6,10 @@ if (myApiEnv === 'local') {
   baseURL = 'https://www.wanandroid.com/'
 } else if (myApiEnv === 'test') {
   // 测试环境
-  baseURL = 'https://www.wanandroid.com12/'
+  baseURL = 'https://www.wanandroid.com/'
 } else if (myApiEnv === 'product') {
   // 线上环境
-  baseURL = 'https://www.wanandroid.com1/'
+  baseURL = 'https://www.wanandroid.com/'
 }
 
 export default {
@@ -86,6 +86,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
@@ -96,7 +97,15 @@ export default {
    */
   axios: {
     // baseURL: 'https://jsonplaceholder.typicode.com/',
-    baseURL,
+    proxy: true,
+  },
+  proxy: {
+    '/api': {
+      target: baseURL,
+      pathRewrite: {
+        '^/api': '/',
+      },
+    },
   },
   /*
    ** Content module configuration
@@ -128,6 +137,6 @@ export default {
     // baseURL: process.env.BASE_URL || 'https://nuxtjs.org',
   },
   privateRuntimeConfig: {
-    apiSecret: process.env.API_SECRET,
+    // apiSecret: process.env.API_SECRET,
   },
 }

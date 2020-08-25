@@ -1,2 +1,15 @@
-#index {
+.page-index {
+  .manage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .pages {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .item {
+        margin: 0 5px;
+      }
+    }
+  }
 }

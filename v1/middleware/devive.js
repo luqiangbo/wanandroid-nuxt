@@ -1,6 +1,6 @@
 import { deviceType } from '@/util/device.js'
 export default function (context) {
-  console.log('en', context)
+  // console.log('en', context)
   context.userAgent = process.server
     ? context.req.headers['user-agent']
     : navigator.userAgent

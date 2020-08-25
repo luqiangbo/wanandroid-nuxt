@@ -1,5 +1,5 @@
 export default function (context) {
-  console.log(process.env)
+  // console.log(process.env)
   // console.log('auth', context)
   const userAgent = process.server
     ? context.req.headers['user-agent']

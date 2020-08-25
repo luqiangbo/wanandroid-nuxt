@@ -1,3 +1,4 @@
+import qs from 'qs'
 export default ($axios) => (resource) => ({
   index() {
     return $axios.$get(`${resource}`)
@@ -17,7 +18,10 @@ export default ($axios) => (resource) => ({
   delete(id) {
     return $axios.$delete(`${resource}/${id}`)
   },
-  page(v) {
-    return $axios.$get(`${resource}/${v}`)
+  get(url) {
+    return $axios.$get(`${resource}/${url}`)
+  },
+  postPayload(url, payload) {
+    return $axios.$post(`${resource}/${url}`, qs.stringify(payload))
   },
 })

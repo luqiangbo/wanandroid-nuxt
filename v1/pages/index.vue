@@ -1,6 +1,6 @@
 <template>
-  <div id="index">
-    <div>
+  <div class="page-index">
+    <div class="banner">
       <swiper ref="mySwiper" :options="s_swiperOptions">
         <swiper-slide v-for="(t, i) in s_banner.list" :key="i">
           <div>{{ t.title }}</div>
@@ -11,8 +11,10 @@
           </div>
         </swiper-slide>
       </swiper>
-      <div>
-        <div class="press" @click="swiper.slidePrev()">左</div>
+      <div class="manage">
+        <div class="prev" @click="swiper.slidePrev()">
+          <el-button>左</el-button>
+        </div>
         <div class="pages">
           <div
             class="item"
@@ -20,14 +22,21 @@
             :key="i"
             @click="onPage(i)"
           >
-            {{ i + 1 }}
+            <el-button>{{ i + 1 }}</el-button>
           </div>
         </div>
-        <div class="next" @click="swiper.slideNext()">右</div>
+        <div class="next" @click="swiper.slideNext()">
+          <el-button>右</el-button>
+        </div>
       </div>
-      <div>
-        <i class="iconfont icon-search"></i>
-      </div>
+      <!-- 登录 -->
+
+      <nuxt-link :to="`/login`">
+        <el-button>
+          <i class="iconfont icon-search"></i>
+          登录
+        </el-button>
+      </nuxt-link>
     </div>
     <!-- 测试 -->
     <div>
@@ -59,11 +68,11 @@ export default {
           el: '.swiper-pagination',
           clickable: true,
         },
-        loop: true,
         autoplay: {
           delay: 5 * 1000,
           disableOnInteraction: false,
         },
+        loop: true,
       },
       s_banner: {
         list: [
@@ -89,7 +98,7 @@ export default {
     }
   },
   async asyncData(ctx) {
-    const res1 = await ctx.app.$axiosWan.page('article/list/1/json')
+    const res1 = await ctx.app.$axiosWan.get('article/list/1/json')
     // console.log(res1.data.datas[0])
     return {
       posts: res1.data.datas,
