@@ -12,6 +12,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'vue/attributes-order': [0],
+    'no-console': 'off',
     'no-unused-vars': [
       1,
       {

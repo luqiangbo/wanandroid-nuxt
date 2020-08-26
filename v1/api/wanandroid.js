@@ -1,27 +1,38 @@
 import qs from 'qs'
+const to = (promise) => {
+  return promise
+    .then((data) => {
+      return [null, data]
+    })
+    .catch((err) => [err, null])
+}
 export default ($axios) => (resource) => ({
-  index() {
-    return $axios.$get(`${resource}`)
+  // 首页文章列表
+  getArticle(int) {
+    return to($axios.$get(`${resource}/article/list/${int}/json`))
   },
-  show(id) {
-    return $axios.$get(`${resource}/${id}`)
+  // 首页banner
+  getBanner() {
+    return to($axios.$get(`${resource}/banner/json`))
   },
-
-  create(payload) {
-    return $axios.$post(`${resource}`, payload)
+  getAllIndex(int) {
+    return to(
+      Promise.all([
+        $axios.$get(`${resource}/article/list/${int}/json`),
+        $axios.$get(`${resource}/banner/json`),
+      ])
+    )
   },
-
-  update(id, payload) {
-    return $axios.$post(`${resource}/${id}`, payload)
+  // 登录
+  postLogin(payload) {
+    return to($axios.$post(`${resource}/user/login`, qs.stringify(payload)))
   },
-
-  delete(id) {
-    return $axios.$delete(`${resource}/${id}`)
+  // 注册
+  postRegister(payload) {
+    return to($axios.$post(`${resource}/user/register`, qs.stringify(payload)))
   },
-  get(url) {
-    return $axios.$get(`${resource}/${url}`)
-  },
-  postPayload(url, payload) {
-    return $axios.$post(`${resource}/${url}`, qs.stringify(payload))
+  // 退出
+  getLogout() {
+    return to($axios.$post(`${resource}/user/logout/json`))
   },
 })

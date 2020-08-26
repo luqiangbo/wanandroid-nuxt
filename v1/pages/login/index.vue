@@ -33,10 +33,7 @@ export default {
   },
   methods: {
     async onLogin() {
-      const res1 = await this.$axiosWan.postPayload(
-        'user/login',
-        this.s_ruleForm
-      )
+      const res1 = await this.$axiosWan.postLogin(this.s_ruleForm)
       console.log('登录', res1)
     },
   },
