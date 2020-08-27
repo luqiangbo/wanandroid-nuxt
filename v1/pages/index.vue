@@ -79,6 +79,7 @@
 
 <script>
 export default {
+  auth: false,
   async asyncData(ctx) {
     // const [err, res] = await ctx.app.$axiosWan.getArticle(1)
     const [err, resList] = await ctx.app.$axiosWan.getAllIndex(1)

@@ -86,6 +86,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
@@ -131,12 +132,52 @@ export default {
     },
   },
   router: {
-    middleware: 'auth',
+    middleware: ['auth'],
   },
   publicRuntimeConfig: {
     // baseURL: process.env.BASE_URL || 'https://nuxtjs.org',
   },
   privateRuntimeConfig: {
     // apiSecret: process.env.API_SECRET,
+  },
+  auth: {
+    token: {
+      prefix: '_token.',
+    },
+    localStorage: {
+      prefix: 'auth.',
+    },
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+      },
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/',
+    },
+    strategies: {
+      local: {
+        token: {
+          required: false,
+          type: false,
+        },
+        user: {
+          autoFetch: false, // false: 禁止登录后用户的获取
+        },
+        endpoints: {
+          login: {
+            url: '/api/user/login',
+            method: 'post',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          },
+          logout: { url: '/api/user/logout/json', method: 'post' },
+          user: { url: '/api/friend/json', method: 'get' },
+        },
+      },
+    },
   },
 }

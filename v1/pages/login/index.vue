@@ -21,20 +21,36 @@
 </template>
 
 <script>
+import qs from 'qs'
 export default {
   data() {
     return {
       s_rules: {},
       s_ruleForm: {
         username: 'caniuse',
-        password: 'password',
+        password: 'luqiangbo',
       },
     }
   },
   methods: {
+    to(promise) {
+      return promise
+        .then((data) => {
+          return [null, data]
+        })
+        .catch((err) => [err, null])
+    },
     async onLogin() {
-      const res1 = await this.$axiosWan.postLogin(this.s_ruleForm)
-      console.log('登录', res1)
+      // const [err1, res1] = await this.$axiosWan.postLogin(this.s_ruleForm)
+      // console.log('哈哈axios', this.$axiosWan)
+      console.log('哈哈auth', this.$auth)
+      const [err, res] = await this.to(
+        this.$auth.loginWith('local', {
+          data: qs.stringify(this.s_ruleForm),
+        })
+      )
+      console.log('登录1', err, res)
+      // console.log('登录2', err1, res1)
     },
   },
 }
