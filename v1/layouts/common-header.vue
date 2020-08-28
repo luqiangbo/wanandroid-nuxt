@@ -22,7 +22,7 @@
           <el-avatar icon="el-icon-user-solid"> </el-avatar>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click="onLogout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </span>
@@ -40,6 +40,12 @@ export default {
   methods: {
     onSelect(key, keyPath) {
       console.log(key, keyPath)
+    },
+    async onLogout() {
+      console.log('tuichu')
+      const [err, res] = await this.$auth.logout()
+      console.log('退出', err, res)
+      this.$router.push('/login')
     },
   },
 }

@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   auth: false,
   async asyncData(ctx) {
@@ -125,6 +126,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('auth', ['loggedIn', 'user']),
     swiperM() {
       return this.$refs.mySwiperM.$swiper
     },
@@ -142,6 +144,8 @@ export default {
 
   methods: {
     onPage(v) {
+      console.log('auth', this.loggedIn, this.user)
+      console.log(this.$auth)
       this.swiperPc.slideTo(v + 1, 1000, false)
     },
     onSlidePrev() {

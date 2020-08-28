@@ -99,6 +99,7 @@ export default {
   axios: {
     // baseURL: 'https://jsonplaceholder.typicode.com/',
     proxy: true,
+    credentials: true,
   },
   proxy: {
     '/api': {
@@ -141,18 +142,18 @@ export default {
     // apiSecret: process.env.API_SECRET,
   },
   auth: {
-    token: {
-      prefix: '_token.',
-    },
-    localStorage: {
-      prefix: 'auth.',
-    },
-    cookie: {
-      prefix: 'auth.',
-      options: {
-        path: '/',
-      },
-    },
+    // token: {
+    //   prefix: '_token.',
+    // },
+    // localStorage: {
+    //   prefix: 'auth.',
+    // },
+    // cookie: {
+    //   prefix: 'auth.',
+    //   options: {
+    //     path: '/',
+    //   },
+    // },
     redirect: {
       login: '/login',
       logout: '/',
@@ -161,21 +162,23 @@ export default {
     },
     strategies: {
       local: {
-        token: {
-          required: false,
-          type: false,
-        },
+        // tokenRequired: false,
+        // tokenType: false,
         user: {
-          autoFetch: false, // false: 禁止登录后用户的获取
+          autoFetch: false,
+        },
+        token: {
+          maxAge: 30,
         },
         endpoints: {
           login: {
             url: '/api/user/login',
             method: 'post',
+            propertyName: false,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           },
           logout: { url: '/api/user/logout/json', method: 'post' },
-          user: { url: '/api/friend/json', method: 'get' },
+          user: { url: '/api/friend/json', method: 'get', propertyName: false },
         },
       },
     },
