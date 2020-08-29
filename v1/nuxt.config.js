@@ -162,7 +162,8 @@ export default {
     },
     strategies: {
       local: {
-        // tokenRequired: false,
+        autoFetchUser: false, // 登录后请求用户接口
+        // tokenRequired: false, // 权限校验
         // tokenType: false,
         user: {
           autoFetch: false,
@@ -175,7 +176,10 @@ export default {
             url: '/api/user/login',
             method: 'post',
             propertyName: false,
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              Referer: 'https://www.wanandroid.com/index',
+            },
           },
           logout: { url: '/api/user/logout/json', method: 'post' },
           user: { url: '/api/friend/json', method: 'get', propertyName: false },

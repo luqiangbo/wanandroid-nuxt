@@ -18,11 +18,17 @@
       </el-submenu>
       <span class="header-user">
         <div class="name">123</div>
-        <el-dropdown>
-          <el-avatar icon="el-icon-user-solid"> </el-avatar>
+        <el-dropdown
+          size="medium"
+          split-button
+          type="primary"
+          trigger="click"
+          @command="onCommand"
+        >
+          <div>个人中心</div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item @click="onLogout">退出</el-dropdown-item>
+            <el-dropdown-item command="a">个人中心</el-dropdown-item>
+            <el-dropdown-item command="b">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </span>
@@ -31,6 +37,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 export default {
   data() {
     return {
@@ -41,11 +48,18 @@ export default {
     onSelect(key, keyPath) {
       console.log(key, keyPath)
     },
+    onCommand(v) {
+      console.log(v)
+      if (v === 'b') {
+        this.onLogout()
+      }
+    },
     async onLogout() {
-      console.log('tuichu')
+      Cookies.remove('loginUserName')
+      Cookies.remove('token_pass')
       const [err, res] = await this.$auth.logout()
       console.log('退出', err, res)
-      this.$router.push('/login')
+      this.$router.push('/')
     },
   },
 }

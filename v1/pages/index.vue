@@ -79,6 +79,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import Cookies from 'js-cookie'
+
 export default {
   auth: false,
   async asyncData(ctx) {
