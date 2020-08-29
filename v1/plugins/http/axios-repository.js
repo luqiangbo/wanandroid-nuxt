@@ -1,3 +1,4 @@
+// 模版
 import createRepository from '~/api/repository'
 export default (ctx, inject) => {
   // inject the repository in the context (ctx.app.$repository)

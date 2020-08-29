@@ -13,6 +13,10 @@ if (myApiEnv === 'local') {
 }
 // const d = new Date()
 // d.setTime(d.getTime() + 2 * 60 * 1000)
+
+const date = new Date() // js获取当前时间
+const min = date.getMinutes() // 2. 获取当前分钟
+date.setMinutes(min + 3) // 3. 设置当前时间+10分钟：把当前分钟数+10后的值重新设置为date对象的分钟数
 export default {
   srcDir: __dirname,
   buildDir: `.nuxt/v1`,
@@ -65,8 +69,8 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/swiper',
-    '@/plugins/api/all',
-    '@/plugins/api/axios',
+    '@/plugins/http/axios-all',
+    '@/plugins/http/axios-instance',
     { src: './static/iconfont/iconfont.js', ssr: false },
   ],
   /*
@@ -146,12 +150,13 @@ export default {
     // token: {
     //   prefix: '_token.',
     // },
+    plugins: ['~/plugins/auth.js'], // 扩展auth插件
     localStorage: false,
     cookie: {
-      prefix: 'auth123.',
+      prefix: '123cookie.',
       options: {
         path: '/',
-        expires: 2 / 24 / 60, // 两分钟 兼容ie
+        expires: 2 / 24 / 60, // 两分钟 兼容ie 用户不操作后 用户操作就一直更新
         // maxAge: 2 * 60, // 两分钟
       },
     },
@@ -164,11 +169,9 @@ export default {
     strategies: {
       local: {
         autoFetchUser: false, // 登录后请求用户接口
-        // tokenRequired: false, // 权限校验
-        // tokenType: false,
-        user: {
-          autoFetch: false,
-        },
+        // tokenRequired: false, // 此选项可用于禁用所有令牌处理
+        // tokenType: Bearer, // 在axios请求中使用的授权标头类型
+        globalToken: false, // 为所有axios请求设置授权标头
         endpoints: {
           login: {
             url: '/api/user/login',

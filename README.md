@@ -26,6 +26,17 @@ docker run --name web-nuxt01 -p 43001:3001 -d caniuse/web-nuxt:0.0.1
 docker run --name web-nuxt01 -p 43001:3001 -p 43002:3002 -d caniuse/web-nuxt:0.0.1
 ```
 
+## 官方文档
+
+auth 验证模块
+https://auth.nuxtjs.org/#getting-started
+
+\$axios 接口模块
+
+https://axios.nuxtjs.org/helpers
+
+## 社区
+
 选用@auxtjs/axios 而非 axios 作为 nuxt 的请求模块 方案
 https://blog.lichter.io/posts/nuxt-api-call-organization-and-decoupling/
 
