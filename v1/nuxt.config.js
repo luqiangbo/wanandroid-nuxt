@@ -11,7 +11,8 @@ if (myApiEnv === 'local') {
   // 线上环境
   baseURL = 'https://www.wanandroid.com/'
 }
-
+// const d = new Date()
+// d.setTime(d.getTime() + 2 * 60 * 1000)
 export default {
   srcDir: __dirname,
   buildDir: `.nuxt/v1`,
@@ -145,15 +146,15 @@ export default {
     // token: {
     //   prefix: '_token.',
     // },
-    // localStorage: {
-    //   prefix: 'auth.',
-    // },
-    // cookie: {
-    //   prefix: 'auth.',
-    //   options: {
-    //     path: '/',
-    //   },
-    // },
+    localStorage: false,
+    cookie: {
+      prefix: 'auth123.',
+      options: {
+        path: '/',
+        expires: 2 / 24 / 60, // 两分钟 兼容ie
+        // maxAge: 2 * 60, // 两分钟
+      },
+    },
     redirect: {
       login: '/login',
       logout: '/',
@@ -167,9 +168,6 @@ export default {
         // tokenType: false,
         user: {
           autoFetch: false,
-        },
-        token: {
-          maxAge: 30,
         },
         endpoints: {
           login: {
