@@ -1,6 +1,7 @@
 <template>
   <div class="page-index">
     <div class="main">
+      <com-page />
       <div v-if="s_banner.list.length">
         <el-row>
           <el-col :xs="24" :sm="0" class="banner-m">
@@ -83,20 +84,32 @@ import Cookies from 'js-cookie'
 
 export default {
   auth: false,
+
+  validate({ params, query }) {
+    // 校验动态路由参数的有效性
+    return true
+  },
+
+  fetch({ store, params }) {
+    // 修改store数据
+  },
   async asyncData(ctx) {
     // const [err, res] = await ctx.app.$axiosWan.getArticle(1)
-    const [err, resList] = await ctx.app.$axiosWan.getAllIndex(1)
+    // const [err, resList] = await ctx.app.$axiosWan.getAllIndex(1)
+    const [err, resList] = await ctx.app.$api.getAllIndex(1)
     if (err) {
       return false
     }
+    console.log(err, resList)
     const [list0, list1] = resList
     return {
-      s_essay: list0.data.datas,
+      s_essay: list0.datas,
       s_banner: {
-        list: list1.data,
+        list: list1,
       },
     }
   },
+
   data() {
     return {
       s_swiperOptionsM: {
@@ -143,7 +156,6 @@ export default {
     this.swiperPc.slideTo(1, 1000, false)
     this.swiperM.slideTo(1, 1000, false)
   },
-
   methods: {
     onPage(v) {
       console.log('auth', this.loggedIn, this.user)
@@ -153,6 +165,18 @@ export default {
     onSlidePrev() {
       this.swiperPc.slidePrev()
     },
+  },
+  head() {
+    return {
+      title: '我就是标题',
+      meta: [
+        {
+          hid: 'hidddd',
+          name: 'namess',
+          content: '首付款酸辣粉家里看',
+        },
+      ],
+    }
   },
 }
 </script>

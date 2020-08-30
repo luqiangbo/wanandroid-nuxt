@@ -67,10 +67,12 @@ export default {
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: [
-    '@/plugins/element-ui',
-    '@/plugins/swiper',
-    '@/plugins/http/axios-all',
-    '@/plugins/http/axios-instance',
+    '~/plugins/element-ui',
+    '~/plugins/swiper',
+    '~/plugins/vue-global.js',
+    '~/plugins/http/axios',
+    // '@/plugins/http/axios-all',
+    // '@/plugins/http/axios-instance',
     { src: './static/iconfont/iconfont.js', ssr: false },
   ],
   /*
@@ -147,9 +149,6 @@ export default {
     // apiSecret: process.env.API_SECRET,
   },
   auth: {
-    // token: {
-    //   prefix: '_token.',
-    // },
     plugins: ['~/plugins/auth.js'], // 扩展auth插件
     localStorage: false,
     cookie: {
