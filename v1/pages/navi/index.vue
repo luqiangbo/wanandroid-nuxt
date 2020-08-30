@@ -1,11 +1,13 @@
 <template>
   <div>
-    300
+    导航
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  auth: false,
+}
 </script>
 
 <style></style>

@@ -23,7 +23,7 @@ export default function ({ $axios, redirect }, inject) {
       return config
     },
     (error) => {
-      console.log(error)
+      // console.log(error)
       return Promise.reject(error)
     }
   )
@@ -31,7 +31,7 @@ export default function ({ $axios, redirect }, inject) {
   api.interceptors.response.use(
     (response) => {
       const res = response.data
-      console.log(response, res)
+      // console.log(response, res)
       if (res.code) {
         Message({
           message: res,
@@ -43,11 +43,12 @@ export default function ({ $axios, redirect }, inject) {
         // }
         return Promise.reject(new Error(res.message || 'Error'))
       } else {
+        console.log(res)
         return res
       }
     },
     (error) => {
-      console.log('err' + error)
+      // console.log('err' + error)
       Message({
         message: error,
         type: 'error',

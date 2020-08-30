@@ -2,13 +2,12 @@
   <div class="page-login">
     <div class="main">
       <el-card>
-        <nuxt-link :to="`/`">
-          <el-button>
-            <i class="iconfont icon-shop"></i>
-            首页
-          </el-button>
-        </nuxt-link>
-        <el-form ref="ruleForm" :model="s_ruleForm" :rules="s_rules">
+        <el-form
+          ref="ruleForm"
+          :model="s_ruleForm"
+          :rules="s_rules"
+          label-position="top"
+        >
           <el-form-item label="用户名" prop="username">
             <el-input type="text" v-model="s_ruleForm.username"></el-input>
           </el-form-item>
@@ -69,13 +68,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .page-login {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   .main {
+    padding-top: 100px;
     width: 500px;
   }
   .submit {

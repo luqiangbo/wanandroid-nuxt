@@ -58,8 +58,12 @@ export default {
       src: '@/assets/style/reset.scss',
       lang: 'scss',
     },
+    {
+      src: '@/assets/style/common.scss',
+      lang: 'scss',
+    },
     'element-ui/lib/theme-chalk/index.css',
-    './static/iconfont/iconfont.css',
+    '~/static/iconfont/iconfont.css',
   ],
   /*
    ** Plugins to load before mounting the App

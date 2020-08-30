@@ -1,3 +1,59 @@
-.xiaomi {
-  font-size: 18px;
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 960px;
+}
+.com-timeline {
+  .el-card__body {
+    padding: 0;
+  }
+  .timeline-content {
+    padding: 18px 24px;
+    &:not(:last-child) {
+      border-bottom: 1px solid #f4f5f6;
+    }
+    &:hover {
+      background-color: #fcfcfc;
+    }
+    .timeline-info {
+      .meta-row {
+        .meta-list {
+          display: flex;
+          padding: 5px 0;
+          .item {
+            color: #b2bac2;
+            margin-right: 6px;
+          }
+        }
+      }
+      .title-row {
+        .title {
+          font-weight: 600;
+          font-size: 17px;
+          color: #2e3135;
+          line-height: 1.2;
+          padding: 5px 0;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .action-row {
+        .action-list {
+          display: flex;
+          padding: 5px 0;
+          .item {
+            color: #b2bac2;
+            margin-right: 6px;
+          }
+        }
+      }
+    }
+  }
+}
+.com-page {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
 }

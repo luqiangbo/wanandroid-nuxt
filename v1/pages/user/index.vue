@@ -1,11 +1,11 @@
 <template>
   <div>
-    <com-header />
-    <Nuxt class="container" />
-    <com-footer />
+    个人中心
   </div>
 </template>
+
 <script>
 export default {}
 </script>
+
 <style></style>
