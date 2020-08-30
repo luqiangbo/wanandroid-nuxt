@@ -59,6 +59,7 @@
             购物车
           </el-button>
         </nuxt-link>
+        <img src="~/assets/svg/enen.svg" />
       </div>
     </div>
     <!-- 测试 -->
@@ -96,11 +97,11 @@ export default {
   async asyncData(ctx) {
     // const [err, res] = await ctx.app.$axiosWan.getArticle(1)
     // const [err, resList] = await ctx.app.$axiosWan.getAllIndex(1)
-    const [err, resList] = await ctx.app.$api.getAllIndex(1)
+    const [err, resList] = await ctx.app.$api_wanandroid.getAllIndex(1)
     if (err) {
       return false
     }
-    console.log(err, resList)
+    // console.log(err, resList)
     const [list0, list1] = resList
     return {
       s_essay: list0.datas,

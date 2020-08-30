@@ -1,6 +1,6 @@
 import { Message } from 'element-ui'
 import Cookies from 'js-cookie'
-import createWan from '~/api/wanandroid'
+import Api from '~/api/index'
 const name = Cookies.get('loginUserName')
 
 // 重定向
@@ -56,5 +56,8 @@ export default function ({ $axios, redirect }, inject) {
       return Promise.reject(error)
     }
   )
-  inject('api', createWan(api)('/api'))
+  for (const key in Api) {
+    const v = Api[key]
+    inject(`api_${key}`, v(api)('/api'))
+  }
 }

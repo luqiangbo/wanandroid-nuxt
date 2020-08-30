@@ -1,4 +1,3 @@
-const path = require('path')
 const myApiEnv = process.env.MY_API_ENV
 let baseURL = 'https://www.wanandroid.com/'
 if (myApiEnv === 'local') {
@@ -70,9 +69,7 @@ export default {
     '~/plugins/element-ui',
     '~/plugins/swiper',
     '~/plugins/vue-global.js',
-    '~/plugins/http/axios',
-    // '@/plugins/http/axios-all',
-    // '@/plugins/http/axios-instance',
+    '~/plugins/axios',
     { src: './static/iconfont/iconfont.js', ssr: false },
   ],
   /*
@@ -92,11 +89,12 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
+    // Doc: https://github.com/nuxt/content
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt/content
+    '@nuxtjs/svg',
     '@nuxt/content',
   ],
   /*

@@ -1,18 +1,11 @@
 <template>
   <div>
-    <common-header />
+    <com-header />
     <Nuxt />
-    <common-footer />
+    <com-footer />
   </div>
 </template>
 <script>
-import commonFooter from './common-footer'
-import commonHeader from './common-header'
-export default {
-  components: {
-    commonFooter,
-    commonHeader,
-  },
-}
+export default {}
 </script>
 <style></style>

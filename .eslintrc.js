@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'vue/attributes-order': [0],
     'no-console': 'off',
+    'prefer-const': 1,
     'no-unused-vars': [
       1,
       {
