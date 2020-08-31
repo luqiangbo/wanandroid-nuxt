@@ -29,7 +29,10 @@
     "element-ui": "^2.13.2",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.14.0",
+    "nuxt-socket-io": "^1.1.11",
     "qs": "^6.9.4",
+    "sockjs-client": "^1.5.0",
+    "stompjs": "^2.3.3",
     "swiper": "^5.4.0",
     "vue-awesome-swiper": "^4.1.1"
   },

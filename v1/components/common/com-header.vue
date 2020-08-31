@@ -2,7 +2,7 @@
   <div id="com-header">
     <div class="container">
       <el-menu
-        :default-active="s_activeIndex"
+        :default-active="this.$route.path"
         class="el-menu-demo"
         mode="horizontal"
         @select="onSelect"
@@ -16,36 +16,48 @@
             {{ item.value }}
           </nuxt-link>
         </el-menu-item>
-
         <span class="header-user">
           <div class="header-login">
-            <nuxt-link to="/login">
+            <nuxt-link to="/login" v-if="!this.$auth.loggedIn">
               登录
             </nuxt-link>
             <nuxt-link to="/enroll">
               注册
             </nuxt-link>
           </div>
-          <el-dropdown
-            size="medium"
-            type="primary"
-            trigger="click"
-            placement="bottom"
-            @command="onCommand"
-          >
-            <el-avatar
-              shape="square"
-              :size="40"
-              :fit="s_user.fit"
-              :src="s_user.url"
-              class="user-img"
-            ></el-avatar>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">个人中心</el-dropdown-item>
-              <el-dropdown-item command="b">购物车</el-dropdown-item>
-              <el-dropdown-item command="c">退出</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+          <div v-if="this.$auth.loggedIn">
+            <div class="header-icon">
+              <nuxt-link to="/collect">
+                <i class="el-icon-star-on"></i>
+              </nuxt-link>
+              <nuxt-link to="/coin">
+                <i class="el-icon-s-finance"></i>
+              </nuxt-link>
+            </div>
+          </div>
+          <div v-if="this.$auth.loggedIn">
+            <el-dropdown
+              size="medium"
+              type="primary"
+              trigger="click"
+              placement="bottom"
+              @command="onCommand"
+            >
+              <el-avatar
+                shape="square"
+                :size="40"
+                :fit="s_user.fit"
+                :src="s_user.url"
+                class="user-img"
+              ></el-avatar>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="user">个人中心</el-dropdown-item>
+                <el-dropdown-item command="collect">收藏</el-dropdown-item>
+                <el-dropdown-item command="coin">积分</el-dropdown-item>
+                <el-dropdown-item command="logout">退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </span>
       </el-menu>
     </div>
@@ -107,11 +119,13 @@ export default {
     },
     onCommand(v) {
       console.log(v)
-      if (v === 'a') {
+      if (v === 'user') {
         this.$router.push('/user')
-      } else if (v === 'b') {
-        this.$router.push('/shop')
-      } else if (v === 'c') {
+      } else if (v === 'collect') {
+        this.$router.push('/collect')
+      } else if (v === 'coin') {
+        this.$router.push('/coin')
+      } else if (v === 'logout') {
         this.onLogout()
       }
     },
@@ -134,10 +148,11 @@ export default {
   margin-bottom: 20px;
   .header-user {
     float: right;
-    margin: 10px 15px 0 0;
+    height: 60px;
     display: flex;
     align-items: center;
     color: #606266;
+    margin-right: 20px;
     .name {
       margin-right: 15px;
     }
@@ -162,6 +177,11 @@ export default {
   }
   .header-login {
     margin-right: 15px;
+    a {
+      &:hover {
+        color: #007fff;
+      }
+    }
   }
   .is-active {
     border: none;
@@ -169,6 +189,16 @@ export default {
   }
   .el-menu.el-menu--horizontal {
     border: none;
+  }
+  .header-icon {
+    font-size: 25px;
+    margin-top: -3px;
+    margin-right: 12px;
+    a {
+      &:hover {
+        color: #007fff;
+      }
+    }
   }
 }
 </style>

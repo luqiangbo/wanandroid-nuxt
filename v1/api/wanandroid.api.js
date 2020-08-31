@@ -18,8 +18,9 @@ export default ($axios) => (resource) => ({
   getAllIndex(int) {
     return to(
       Promise.all([
-        $axios.$get(`${resource}/article/list/${int}/json`),
         $axios.$get(`${resource}/banner/json`),
+        $axios.$get(`${resource}/article/list/${int}/json`),
+        $axios.$get(`${resource}/hotkey/json`),
       ])
     )
   },

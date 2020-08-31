@@ -69,5 +69,34 @@
   }
   .index-right {
     padding-left: 20px;
+    .com-right-hotkey {
+      margin-bottom: 20px;
+      .hotkey {
+        font-size: 16px;
+        padding-bottom: 10px;
+      }
+      .hotkey-list {
+        .item {
+          cursor: pointer;
+          margin-right: 8px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+    .com-right-user {
+      .el-card__body {
+        padding: 0;
+      }
+      .user-list {
+        color: #909399;
+        .item {
+          padding: 15px 20px;
+          cursor: pointer;
+          &:hover {
+            background-color: #f4f5f5;
+          }
+        }
+      }
+    }
   }
 }

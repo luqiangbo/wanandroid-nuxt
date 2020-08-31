@@ -32,18 +32,18 @@ export default function ({ $axios, redirect }, inject) {
     (response) => {
       const res = response.data
       // console.log(response, res)
-      if (res.code) {
+      if (res.errorCode !== 0) {
         Message({
-          message: res,
+          message: res.errorMsg,
           type: 'error',
           duration: 5 * 1000,
         })
         // if (todo) {
         //   console.log('重新登录')
         // }
-        return Promise.reject(new Error(res.message || 'Error'))
+        return Promise.reject(res.errorMsg)
       } else {
-        console.log(res)
+        // console.log(res)
         return res
       }
     },

@@ -35,6 +35,9 @@ https://auth.nuxtjs.org/#getting-started
 
 https://axios.nuxtjs.org/helpers
 
+websocket 文档
+https://nuxt-socket-io.netlify.app/
+
 ## 社区
 
 选用@auxtjs/axios 而非 axios 作为 nuxt 的请求模块 方案
@@ -45,3 +48,6 @@ https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage
 
 权限验证
 https://dev.to/mandeepm91/how-to-add-authentication-to-your-universal-nuxt-app-using-nuxt-auth-module-3ffm
+
+// Nuxt.js + SockJs 实现 webSocket 订单实时消息 语音播报
+https://blog.csdn.net/lq099526/article/details/96480959

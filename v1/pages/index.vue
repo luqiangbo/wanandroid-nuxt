@@ -1,7 +1,7 @@
 <template>
   <div id="page-index">
     <el-row>
-      <el-col :xs="24" :sm="18" class="index-left">
+      <el-col :xs="24" :sm="17" class="index-left">
         <el-card v-if="s_banner.list.length" class="index-banner">
           <el-row>
             <el-col :xs="24" :sm="0" class="banner-m">
@@ -44,7 +44,11 @@
         <!--  -->
         <el-card class="com-timeline">
           <div>
-            <li :key="i" v-for="(t, i) in slicedPosts" class="timeline-content">
+            <li
+              :key="i"
+              v-for="(t, i) in s_essay.datas"
+              class="timeline-content"
+            >
               <div class="timeline-info">
                 <div class="meta-row">
                   <ul class="meta-list">
@@ -71,7 +75,7 @@
             <el-pagination
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
-              :current-page.sync="s_currentPage"
+              :current-page.sync="s_essay.curPage"
               :page-size="s_essay.size"
               :page-sizes="[10, 20, 50, 100]"
               layout="total,sizes , prev, pager, next"
@@ -81,9 +85,60 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="6" class="index-right">
-        <el-card>
-          right
+      <el-col :xs="24" :sm="7" class="index-right">
+        <el-card class="com-right-hotkey">
+          <div slot="header">
+            <span>搜索热词</span>
+          </div>
+          <div class="hotkey-list">
+            <el-tag
+              type="info"
+              v-for="(t, i) in s_hotkey.list"
+              :key="i"
+              class="item"
+            >
+              {{ t.name }}
+            </el-tag>
+          </div>
+        </el-card>
+
+        <!-- 个人中心 -->
+        <el-card class="com-right-user mb20">
+          <div slot="header">
+            <span>个人中心</span>
+          </div>
+          <ul class="user-list">
+            <li class="item">
+              <nuxt-link to="/collect">
+                <i class="el-icon-star-on"></i>
+                <span>收藏 : 需登录 </span>
+              </nuxt-link>
+            </li>
+            <li class="item">
+              <nuxt-link to="/coin">
+                <i class="el-icon-s-finance"></i>
+                <span>积分 : 需登录 </span>
+              </nuxt-link>
+            </li>
+          </ul>
+        </el-card>
+
+        <el-card class="com-right-websocket mb20">
+          <div slot="header">
+            <span>websocket</span>
+          </div>
+          <div>
+            <div>
+              {{ messageRxd }}
+            </div>
+            <el-input
+              v-model="websocketText"
+              placeholder="请输入内容"
+            ></el-input>
+            <div>
+              <el-button type="primary" @click="getMessage">提交</el-button>
+            </div>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -94,26 +149,36 @@
 import { mapState } from 'vuex'
 export default {
   auth: false,
-
+  watchQuery: ['page'],
   validate({ params, query }) {
     // 校验动态路由参数的有效性
     return true
   },
-
   fetch({ store, params }) {
     // 修改store数据
   },
   async asyncData(ctx) {
-    const [err, resList] = await ctx.app.$api_wanandroid.getAllIndex(1)
+    const context = ctx.app.context
+    let { page } = context.query
+    console.log(page)
+    if (page) {
+      page = page * 1
+    } else {
+      page = 1
+    }
+    const [err, resList] = await ctx.app.$api_wanandroid.getAllIndex(page - 1)
     if (err) {
       return false
     }
-    // console.log(err, resList)
-    const [list0, list1] = resList
+    const [res0, res1, res2] = resList
+    console.log(res2)
     return {
-      s_essay: list0,
+      s_essay: res1,
       s_banner: {
-        list: list1,
+        list: res0,
+      },
+      s_hotkey: {
+        list: res2,
       },
     }
   },
@@ -159,6 +224,9 @@ export default {
       s_banner: {
         list: [],
       },
+      s_hotkey: {
+        list: [],
+      },
       s_essay: {
         curPage: null, // 2
         datas: [],
@@ -170,6 +238,8 @@ export default {
       },
       s_swiperActive: 1,
       s_currentPage: 1,
+      messageRxd: '',
+      websocketText: '',
     }
   },
   computed: {
@@ -179,9 +249,6 @@ export default {
     },
     swiperPc() {
       return this.$refs.mySwiperPc.$swiper
-    },
-    slicedPosts() {
-      return this.s_essay.datas
     },
   },
   mounted() {
@@ -204,7 +271,9 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
+      this.$router.push({ path: '/', query: { page: val + '' } })
     },
+    getMessage() {},
   },
   head() {
     return {
