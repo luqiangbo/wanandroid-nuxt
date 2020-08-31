@@ -114,6 +114,13 @@ export default {
     }
   },
   methods: {
+    to(promise) {
+      return promise
+        .then((data) => {
+          return [null, data]
+        })
+        .catch((err) => [err, null])
+    },
     onSelect(key, keyPath) {
       console.log(key, keyPath)
     },
@@ -130,10 +137,12 @@ export default {
       }
     },
     async onLogout() {
+      const [err, res] = await this.to(this.$auth.logout())
+      if (err) {
+        console.log('服务端退出失败')
+      }
       Cookies.remove('loginUserName')
       Cookies.remove('token_pass')
-      const [err, res] = await this.$auth.logout()
-      // console.log('退出', err, res)
       this.$router.push('/')
     },
   },

@@ -180,10 +180,10 @@ export default {
             propertyName: false,
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
-              Referer: 'https://www.wanandroid.com/index',
+              // Referer: 'https://www.wanandroid.com/index',
             },
           },
-          logout: { url: '/api/user/logout/json', method: 'post' },
+          logout: { url: '/api/user/logout/json', method: 'get' },
           user: { url: '/api/friend/json', method: 'get', propertyName: false },
         },
       },

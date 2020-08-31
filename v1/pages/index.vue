@@ -16,10 +16,13 @@
             <el-col :xs="0" :sm="24" class="banner-pc">
               <swiper ref="mySwiperPc" :options="s_swiperOptionsPc">
                 <swiper-slide v-for="(t, i) in s_banner.list" :key="i">
-                  <div
+                  <!-- <div
                     class="banner-item"
                     :style="{ backgroundImage: `url(${t.imagePath})` }"
-                  ></div>
+                  ></div> -->
+                  <div class="banner-item">
+                    <img :src="t.imagePath" alt="title" />
+                  </div>
                 </swiper-slide>
               </swiper>
               <div class="manage">
@@ -191,7 +194,7 @@ export default {
           clickable: true,
         },
         autoplay: {
-          delay: 5 * 1000,
+          delay: 2 * 60 * 1000,
           disableOnInteraction: false,
         },
         loop: true,
@@ -202,7 +205,7 @@ export default {
           clickable: true,
         },
         autoplay: {
-          delay: 5 * 1000,
+          delay: 2 * 60 * 1000,
           disableOnInteraction: false,
         },
         loop: true,
