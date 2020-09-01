@@ -1,7 +1,7 @@
 <template>
   <div id="page-index">
     <el-row>
-      <el-col :xs="24" :sm="17" class="index-left">
+      <el-col :xs="24" :sm="17" class="index-left mb20">
         <el-card v-if="s_banner.list.length" class="index-banner">
           <el-row>
             <el-col :xs="24" :sm="0" class="banner-m">
@@ -47,11 +47,7 @@
         <!--  -->
         <el-card class="com-timeline">
           <div>
-            <li
-              :key="i"
-              v-for="(t, i) in s_essay.datas"
-              class="timeline-content"
-            >
+            <li :key="i" v-for="(t, i) in s_essay.datas" class="timeline-content">
               <div class="timeline-info">
                 <div class="meta-row">
                   <ul class="meta-list">
@@ -88,23 +84,32 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="7" class="index-right">
+      <el-col :xs="24" :sm="7" class="index-right mb20">
+        <!-- 搜索 -->
+        <el-card class="com-right-search mb20">
+          <div>
+            <div class="search-content">
+              <el-input
+                v-model="websocketText"
+                suffix-icon="el-icon-search"
+                placeholder="搜索文字/标题/用户"
+                size="small"
+                @change="onSearch"
+              ></el-input>
+            </div>
+          </div>
+        </el-card>
+        <!-- 搜索热词 -->
         <el-card class="com-right-hotkey">
           <div slot="header">
             <span>搜索热词</span>
           </div>
           <div class="hotkey-list">
-            <el-tag
-              type="info"
-              v-for="(t, i) in s_hotkey.list"
-              :key="i"
-              class="item"
-            >
+            <el-tag type="info" v-for="(t, i) in s_hotkey.list" :key="i" class="item">
               {{ t.name }}
             </el-tag>
           </div>
         </el-card>
-
         <!-- 个人中心 -->
         <el-card class="com-right-user mb20">
           <div slot="header">
@@ -125,24 +130,6 @@
             </li>
           </ul>
         </el-card>
-
-        <el-card class="com-right-websocket mb20">
-          <div slot="header">
-            <span>websocket</span>
-          </div>
-          <div>
-            <div>
-              {{ messageRxd }}
-            </div>
-            <el-input
-              v-model="websocketText"
-              placeholder="请输入内容"
-            ></el-input>
-            <div>
-              <el-button type="primary" @click="getMessage">提交</el-button>
-            </div>
-          </div>
-        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -150,6 +137,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { get, differenceBy } from 'lodash'
 export default {
   auth: false,
   watchQuery: ['page'],
@@ -161,6 +149,7 @@ export default {
     // 修改store数据
   },
   async asyncData(ctx) {
+    //
     const context = ctx.app.context
     let { page } = context.query
     console.log(page)
@@ -211,8 +200,7 @@ export default {
         loop: true,
         on: {
           slideChangeTransitionStart: (v) => {
-            const swiper =
-              this.$refs.mySwiperPc && this.$refs.mySwiperPc.$swiper
+            const swiper = this.$refs.mySwiperPc && this.$refs.mySwiperPc.$swiper
             if (swiper) {
               const leng = this.s_banner.list.length
               let active = swiper.activeIndex
@@ -223,9 +211,6 @@ export default {
             }
           },
         },
-      },
-      s_banner: {
-        list: [],
       },
       s_hotkey: {
         list: [],
@@ -243,8 +228,10 @@ export default {
       s_currentPage: 1,
       messageRxd: '',
       websocketText: '',
+      abc: '',
     }
   },
+
   computed: {
     ...mapState('auth', ['loggedIn', 'user']),
     swiperM() {
@@ -276,7 +263,15 @@ export default {
       console.log(`当前页: ${val}`)
       this.$router.push({ path: '/', query: { page: val + '' } })
     },
-    getMessage() {},
+    onSearch(v) {
+      // 搜索
+      // console.log(v)
+      const a = {
+        c: 123,
+      }
+      const haha = differenceBy([3.1, 2.2, 1.3], [4.4, 2.5], Math.floor)
+      this.abc = get(a, 'c' + '小明' + haha)
+    },
   },
   head() {
     return {

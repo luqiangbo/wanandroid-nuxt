@@ -1,11 +1,5 @@
 import qs from 'qs'
-const to = (promise) => {
-  return promise
-    .then((data) => {
-      return [null, data]
-    })
-    .catch((err) => [err, null])
-}
+import { to } from '~/util'
 export default ($axios) => (resource) => ({
   // 首页文章列表
   getArticle(int) {
@@ -16,12 +10,13 @@ export default ($axios) => (resource) => ({
     return to($axios.$get(`${resource}/banner/json`))
   },
   getAllIndex(int) {
+    console.log(this)
     return to(
       Promise.all([
         $axios.$get(`${resource}/banner/json`),
         $axios.$get(`${resource}/article/list/${int}/json`),
         $axios.$get(`${resource}/hotkey/json`),
-      ])
+      ]),
     )
   },
   // 登录

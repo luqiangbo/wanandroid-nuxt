@@ -54,16 +54,16 @@ export default {
    ** Global CSS
    */
   css: [
-    {
-      src: '@/assets/style/reset.scss',
-      lang: 'scss',
-    },
-    {
-      src: '@/assets/style/common.scss',
-      lang: 'scss',
-    },
     'element-ui/lib/theme-chalk/index.css',
     '~/static/iconfont/iconfont.css',
+    {
+      src: '~/assets/style/reset.scss',
+      lang: 'scss',
+    },
+    {
+      src: '~/assets/style/common.scss',
+      lang: 'scss',
+    },
   ],
   /*
    ** Plugins to load before mounting the App
@@ -74,7 +74,9 @@ export default {
     '~/plugins/swiper',
     '~/plugins/vue-global.js',
     '~/plugins/axios',
-    { src: './static/iconfont/iconfont.js', ssr: false },
+    // '~/plugins/sticky',
+    // { src: '~/plugins/sticky', ssr: false },
+    { src: '~/static/iconfont/iconfont.js', ssr: false },
   ],
   /*
    ** Auto import components

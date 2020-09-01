@@ -25,7 +25,7 @@ export default function ({ $axios, redirect }, inject) {
     (error) => {
       // console.log(error)
       return Promise.reject(error)
-    }
+    },
   )
   // 出参
   api.interceptors.response.use(
@@ -55,7 +55,7 @@ export default function ({ $axios, redirect }, inject) {
         duration: 5 * 1000,
       })
       return Promise.reject(error)
-    }
+    },
   )
   for (const key in Api) {
     const v = Api[key]

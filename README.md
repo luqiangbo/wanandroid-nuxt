@@ -51,3 +51,8 @@ https://dev.to/mandeepm91/how-to-add-authentication-to-your-universal-nuxt-app-u
 
 // Nuxt.js + SockJs 实现 webSocket 订单实时消息 语音播报
 https://blog.csdn.net/lq099526/article/details/96480959
+
+## 待解决
+
+nuxt sticky 粘性插件没找到合适的
+https://github.com/mehwww/vue-sticky-directive/issues/27

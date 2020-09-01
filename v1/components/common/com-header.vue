@@ -1,17 +1,8 @@
 <template>
   <div id="com-header">
     <div class="container">
-      <el-menu
-        :default-active="this.$route.path"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="onSelect"
-      >
-        <el-menu-item
-          :index="item.label"
-          :key="index"
-          v-for="(item, index) in s_routers.list"
-        >
+      <el-menu :default-active="this.$route.path" class="el-menu-demo" mode="horizontal" @select="onSelect">
+        <el-menu-item :index="item.label" :key="index" v-for="(item, index) in s_routers.list">
           <nuxt-link :to="item.label" class="com-menu-link">
             {{ item.value }}
           </nuxt-link>
@@ -36,20 +27,8 @@
             </div>
           </div>
           <div v-if="this.$auth.loggedIn">
-            <el-dropdown
-              size="medium"
-              type="primary"
-              trigger="click"
-              placement="bottom"
-              @command="onCommand"
-            >
-              <el-avatar
-                shape="square"
-                :size="40"
-                :fit="s_user.fit"
-                :src="s_user.url"
-                class="user-img"
-              ></el-avatar>
+            <el-dropdown size="medium" type="primary" trigger="click" placement="bottom" @command="onCommand">
+              <el-avatar shape="square" :size="40" :fit="s_user.fit" :src="s_user.url" class="user-img"></el-avatar>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item command="user">个人中心</el-dropdown-item>
                 <el-dropdown-item command="collect">收藏</el-dropdown-item>
@@ -108,9 +87,19 @@ export default {
       s_activeIndex: '/',
       s_user: {
         fits: 'cover',
-        url:
-          'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       },
+      s_stickyOffset: {},
+    }
+  },
+  created() {
+    if (process.browser) {
+      window.addEventListener('scroll', this.onScroll)
+    }
+  },
+  destroyed() {
+    if (process.browser) {
+      window.removeEventListener('scroll', this.onScroll)
     }
   },
   methods: {
@@ -135,6 +124,12 @@ export default {
       } else if (v === 'logout') {
         this.onLogout()
       }
+    },
+    onScroll(v) {
+      const en = this.$util.getViewHeight()
+      const en1 = this.$util.getScrollTop()
+      const en2 = this.$util.getContentHeight()
+      // console.log(en, en1, en2)
     },
     async onLogout() {
       const [err, res] = await this.to(this.$auth.logout())
