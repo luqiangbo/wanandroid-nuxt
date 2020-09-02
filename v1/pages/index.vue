@@ -139,6 +139,7 @@
 import { mapState } from 'vuex'
 import { get, differenceBy } from 'lodash'
 export default {
+  name: 'PageIndex',
   auth: false,
   watchQuery: ['page'],
   validate({ params, query }) {

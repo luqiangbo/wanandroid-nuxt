@@ -7,6 +7,7 @@
 <script>
 export default {
   auth: false,
+  name: 'PageNavi',
 }
 </script>
 

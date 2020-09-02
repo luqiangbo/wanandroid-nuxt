@@ -46,6 +46,7 @@
 <script>
 import Cookies from 'js-cookie'
 export default {
+  name: 'ComHeader',
   data() {
     return {
       s_routers: {

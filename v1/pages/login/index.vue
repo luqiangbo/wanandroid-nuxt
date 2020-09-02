@@ -2,12 +2,7 @@
   <div class="page-login">
     <div class="main">
       <el-card>
-        <el-form
-          ref="ruleForm"
-          :model="s_ruleForm"
-          :rules="s_rules"
-          label-position="top"
-        >
+        <el-form ref="ruleForm" :model="s_ruleForm" :rules="s_rules" label-position="top">
           <el-form-item label="用户名" prop="username">
             <el-input type="text" v-model="s_ruleForm.username"></el-input>
           </el-form-item>
@@ -28,6 +23,7 @@
 <script>
 import qs from 'qs'
 export default {
+  name: 'PageLogin',
   data() {
     return {
       s_rules: {},
@@ -52,7 +48,7 @@ export default {
       const [err, res] = await this.to(
         this.$auth.loginWith('local', {
           data: qs.stringify(this.s_ruleForm),
-        })
+        }),
       )
 
       // console.log('登录1', err, res)

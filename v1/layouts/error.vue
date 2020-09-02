@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'LayoutError',
   props: ['error'],
 }
 </script>

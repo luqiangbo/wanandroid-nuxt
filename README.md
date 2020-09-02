@@ -56,3 +56,9 @@ https://blog.csdn.net/lq099526/article/details/96480959
 
 nuxt sticky 粘性插件没找到合适的
 https://github.com/mehwww/vue-sticky-directive/issues/27
+
+nuxt 高并发
+https://www.zhihu.com/question/323485389
+
+nuxt 性能
+https://www.cnblogs.com/lessfish/p/12411497.html

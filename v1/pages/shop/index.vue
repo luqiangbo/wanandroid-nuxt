@@ -7,6 +7,7 @@
 <script>
 export default {
   auth: true,
+  name: 'PageShop',
   // middleware: ['auth']
 }
 </script>

@@ -10,18 +10,16 @@ if (myApiEnv === 'local') {
   // 线上环境
   baseURL = 'https://www.wanandroid.com/'
 }
-// const d = new Date()
-// d.setTime(d.getTime() + 2 * 60 * 1000)
 
-const date = new Date() // js获取当前时间
-const min = date.getMinutes() // 2. 获取当前分钟
-date.setMinutes(min + 3) // 3. 设置当前时间+10分钟：把当前分钟数+10后的值重新设置为date对象的分钟数
 export default {
   srcDir: __dirname,
   buildDir: `.nuxt/v1`,
   server: {
     port: 3001, // default: 3000
     host: '0.0.0.0', // default: localhost
+  },
+  render: {
+    compressor: false, // 关闭默认gzip打包
   },
   /*
    ** Nuxt rendering mode
@@ -102,6 +100,13 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/svg',
     '@nuxt/content',
+    [
+      '@nuxtjs/component-cache',
+      {
+        max: 10000,
+        maxAge: 1000 * 60 * 60,
+      },
+    ],
   ],
   /*
    ** Axios module configuration

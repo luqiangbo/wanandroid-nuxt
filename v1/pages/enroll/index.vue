@@ -2,28 +2,15 @@
   <div class="page-enroll">
     <div class="main">
       <el-card>
-        <el-form
-          :model="ruleForm"
-          status-icon
-          ref="ruleForm"
-          label-width="100px"
-          label-position="top"
-          class="demo-ruleForm"
-        >
+        <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" label-position="top" class="demo-ruleForm">
           <el-form-item label="名称">
             <el-input v-model.trim="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="密码">
-            <el-input
-              type="password"
-              v-model.trim="ruleForm.password"
-            ></el-input>
+            <el-input type="password" v-model.trim="ruleForm.password"></el-input>
           </el-form-item>
           <el-form-item label="确认密码">
-            <el-input
-              type="password"
-              v-model.trim="ruleForm.repassword"
-            ></el-input>
+            <el-input type="password" v-model.trim="ruleForm.repassword"></el-input>
           </el-form-item>
 
           <div class="submit">
@@ -37,6 +24,7 @@
 <script>
 export default {
   auth: false,
+  name: 'PageEnroll',
   data() {
     return {
       ruleForm: {

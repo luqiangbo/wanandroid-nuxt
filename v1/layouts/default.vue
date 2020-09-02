@@ -6,6 +6,8 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  name: 'LayoutDefault',
+}
 </script>
 <style></style>
