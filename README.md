@@ -62,3 +62,7 @@ https://www.zhihu.com/question/323485389
 
 nuxt 性能
 https://www.cnblogs.com/lessfish/p/12411497.html
+
+### nuxt next 性能对比
+
+https://blog.fundebug.com/2019/05/23/next-nuxt-nest/

@@ -42,20 +42,15 @@ export default {
         .catch((err) => [err, null])
     },
     async onLogin() {
-      // const [err1, res1] = await this.$axiosWan.postLogin(this.s_ruleForm)
-      // console.log('哈哈axios', this.$axiosWan)
-      // console.log('onLogin事件 auth', this.$auth)
       const [err, res] = await this.to(
         this.$auth.loginWith('local', {
           data: qs.stringify(this.s_ruleForm),
         }),
       )
-
-      // console.log('登录1', err, res)
-      // console.log('登录2', err1, res1)
-      if (err) {
-        this.$router.push('/login')
-        return
+      const { errorCode, errorMsg } = res.data
+      if (errorCode !== 0) {
+        this.$message.error(errorMsg)
+        return false
       }
       this.$auth.setUser(res.data.data)
       this.$router.push('/')
