@@ -63,6 +63,8 @@ https://www.zhihu.com/question/323485389
 nuxt 性能
 https://www.cnblogs.com/lessfish/p/12411497.html
 
-### nuxt next 性能对比
+### nuxt next 性能对比 ssr 方案讨论
 
 https://blog.fundebug.com/2019/05/23/next-nuxt-nest/
+
+https://cnodejs.org/topic/5e0c53b801c0915a9d9bd697
