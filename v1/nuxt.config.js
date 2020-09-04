@@ -1,3 +1,6 @@
+import path from 'path'
+import fs from 'fs'
+
 const myApiEnv = process.env.MY_API_ENV
 let baseURL = 'https://www.wanandroid.com/'
 if (myApiEnv === 'local') {
@@ -17,6 +20,12 @@ export default {
   server: {
     port: 3001, // default: 3000
     host: '0.0.0.0', // default: localhost
+    server: {
+      https: {
+        key: fs.readFileSync(path.resolve(__dirname, '/root/nginx/ssl/key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, '/root/nginx/ssl/cert.pem')),
+      },
+    },
   },
   render: {
     compressor: false, // 关闭默认gzip打包
