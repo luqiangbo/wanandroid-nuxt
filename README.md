@@ -372,7 +372,7 @@ export default {
 - 启动容器：docker run <ARG> ... <IMAGE>
 
 // 单项目部署
-docker run --name web-nuxt01 -p 43001:3001 -d caniuse/web-nuxt:0.0.1
+docker run --name web-nuxt01 -p 49168:3001 -d caniuse/web-nuxt:0.0.1
 // 多项目部署
 docker run --name web-nuxt01 -p 43001:3001 -p 43002:3002 -d caniuse/web-nuxt:0.0.1
 ```
